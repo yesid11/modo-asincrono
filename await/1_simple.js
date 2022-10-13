@@ -1,9 +1,9 @@
-//dependecia a XMLHttpResquest
+//Dependecia a XMLHttpResquest
 const http = require('xmlhttprequest').XMLHttpRequest
 
 const url = "https://pokeapi.co/api/v2/type"
 
-//Funcion para conectar a una Api publica 
+//Funcion para conectara una Api publica 
 function get_data(endpoint){
     let promise = new Promise(function(resolve, rejected){
         //1. crear el objeto de conexion
@@ -40,9 +40,13 @@ function fallo(status){
 }
 
  //Invocar get_data 
- get_data(url)
-    .then(function(data){
-    exito(data)
- }).catch(function(error){
-    fallo(Error(error))
- })
+ const f = async function(){
+    try{
+        let response = await get_data(url)
+        exito(response)
+    }catch( status ){
+        fallo(status)
+    }
+ }
+
+ f()
